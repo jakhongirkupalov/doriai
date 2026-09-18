@@ -45,23 +45,33 @@ with tab1:
                 st.error(str(e))
 
     if "repurp" in st.session_state:
-        tm, ranked = st.session_state["repurp"]
+        tm, ranked_all = st.session_state["repurp"]
         a, b, c = st.columns(3)
         a.metric("O'quv to'plami", tm.n_train)
         b.metric("CV R²", f"{tm.cv_r2:.2f}")
         c.metric("CV RMSE (pChEMBL)", f"{tm.cv_rmse:.2f}")
+
+        # Past ishonchli bashoratlarni ixtiyoriy yashirish
+        ranked = ranked_all
+        if st.checkbox("Past ishonchli bashoratlarni yashirish", value=True):
+            ranked = ranked_all[ranked_all["confidence"] != "past"].reset_index(drop=True)
+
         st.plotly_chart(px.bar(ranked.head(15), x="pred_pchembl", y="name", color="confidence",
                                orientation="h", title="Nishonga qarshi bashorat qilingan faollik",
                                height=450,
+                               color_discrete_map={"yuqori": "#0B5FA5", "o'rta": "#5DA9E9", "past": "#C9D6E3"},
                                category_orders={"name": ranked.head(15)["name"].tolist()}),
                         use_container_width=True)
         st.dataframe(ranked, use_container_width=True, hide_index=True)
-        n_known = int(ranked["known_active"].sum())
-        new_hits = ranked[(~ranked["known_active"]) & (ranked["confidence"] == "yuqori")]["name"].tolist()
+
+        # Validatsiya har doim to'liq ro'yxat bo'yicha hisoblanadi
+        n_known = int(ranked_all["known_active"].sum())
+        new_hits = ranked_all[(~ranked_all["known_active"]) & (ranked_all["confidence"] == "yuqori")]["name"].tolist()
         st.info(f"✔️ Top-25 ichida {n_known} ta dori o'qitish ma'lumotlarida bor edi — model ularni to'g'ri "
                 f"eslab qoldi. O'qitishda bo'lmagan, lekin yuqori ishonch bilan topilganlar: "
                 f"{', '.join(new_hits) or '—'}. Ular laboratoriyada tekshirishga arzigulik gipotezalar.")
-        if "chembl_id" in ranked.columns:
+
+        if "chembl_id" in ranked.columns and len(ranked):
             pick = st.selectbox("Dori ko'rsatmalarini ko'rish", ranked["name"].tolist())
             row = ranked[ranked["name"] == pick].iloc[0]
             cc1, cc2 = st.columns([1, 2])

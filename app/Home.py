@@ -43,3 +43,5 @@ st.info("**Validatsiya:** EGFR modeli o'qitish ma'lumotlarida bo'lmagan afatinib
 st.caption("Keyingi bosqich: klinik tadqiqotni rejalashtirish (ClinicalTrials.gov) va ilmiy adabiyot "
            "tahlili (PubMed) — kod tayyor, integratsiya jarayonida.")
 st.caption(DISCLAIMER)
+
+
