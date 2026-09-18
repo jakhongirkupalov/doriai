@@ -53,14 +53,14 @@ with tab1:
         st.plotly_chart(px.bar(ranked.head(15), x="pred_pchembl", y="name", color="confidence",
                                orientation="h", title="Nishonga qarshi bashorat qilingan faollik",
                                height=450,
-                               category_orders={"name": ranked.head(15)["name"].tolist()})
-                        .update_yaxes(autorange="reversed"),
+                               category_orders={"name": ranked.head(15)["name"].tolist()}),
                         use_container_width=True)
         st.dataframe(ranked, use_container_width=True, hide_index=True)
         n_known = int(ranked["known_active"].sum())
-        st.info(f"✔️ Validatsiya: top-25 ichida {n_known} ta dori ushbu nishonga qarshi ChEMBL'da "
-                "allaqachon faol deb qayd etilgan — model ma'lum bilimni 'qayta kashf' qilmoqda. "
-                "`known_active=False` va ishonchi yuqori bo'lganlar — yangi gipotezalar.")
+        new_hits = ranked[(~ranked["known_active"]) & (ranked["confidence"] == "yuqori")]["name"].tolist()
+        st.info(f"✔️ Top-25 ichida {n_known} ta dori o'qitish ma'lumotlarida bor edi — model ularni to'g'ri "
+                f"eslab qoldi. O'qitishda bo'lmagan, lekin yuqori ishonch bilan topilganlar: "
+                f"{', '.join(new_hits) or '—'}. Ular laboratoriyada tekshirishga arzigulik gipotezalar.")
         if "chembl_id" in ranked.columns:
             pick = st.selectbox("Dori ko'rsatmalarini ko'rish", ranked["name"].tolist())
             row = ranked[ranked["name"] == pick].iloc[0]

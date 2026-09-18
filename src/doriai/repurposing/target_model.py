@@ -70,5 +70,8 @@ def rank_library(tm: TargetModel, lib: DrugLibrary, top_k: int = 25) -> pd.DataF
     out["nearest_train_sim"] = ad.round(2)
     out["confidence"] = pd.cut(ad, [-0.01, 0.3, 0.5, 1.01], labels=["past", "o'rta", "yuqori"])
     out["known_active"] = out["ik14"].isin(tm.train_ik14)
-    return (out.sort_values("pred_pchembl", ascending=False)
-               .drop(columns=["ik14"]).head(top_k).reset_index(drop=True))
+        # Bir molekulaning tuz shakllarini birlashtiramiz — qisqa nomli yozuv qoladi
+    out["_len"] = out["name"].str.len()
+    out = (out.sort_values(["pred_pchembl", "_len"], ascending=[False, True])
+              .drop_duplicates(subset="ik14"))
+    return out.drop(columns=["ik14", "_len"]).head(top_k).reset_index(drop=True)
