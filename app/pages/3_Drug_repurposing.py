@@ -26,7 +26,9 @@ with tab1:
     targets = st.session_state.get("targets")
     if targets is not None and not targets.empty:
         human = targets[targets["organism"] == "Homo sapiens"]
-        opts = (human if not human.empty else targets)
+        opts = (human if not human.empty else targets).copy()
+        # Oddiy oqsillar (SINGLE PROTEIN) birinchi — ularda o'lchovlar eng ko'p
+        opts = opts.sort_values("target_type", key=lambda s: s != "SINGLE PROTEIN", kind="stable")
         label = opts.apply(lambda r: f"{r.target_chembl_id} — {r.pref_name} ({r.target_type})", axis=1)
         choice = st.selectbox("Nishon", label.tolist())
         target_id = choice.split(" — ")[0]
@@ -50,7 +52,9 @@ with tab1:
         c.metric("CV RMSE (pChEMBL)", f"{tm.cv_rmse:.2f}")
         st.plotly_chart(px.bar(ranked.head(15), x="pred_pchembl", y="name", color="confidence",
                                orientation="h", title="Nishonga qarshi bashorat qilingan faollik",
-                               height=450).update_yaxes(autorange="reversed"),
+                               height=450,
+                               category_orders={"name": ranked.head(15)["name"].tolist()})
+                        .update_yaxes(autorange="reversed"),
                         use_container_width=True)
         st.dataframe(ranked, use_container_width=True, hide_index=True)
         n_known = int(ranked["known_active"].sum())

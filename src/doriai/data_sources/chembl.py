@@ -15,7 +15,7 @@ API = f"{BASE}/chembl/api/data"
 def _paginate(first_url: str, params: dict, key: str, max_records: int) -> list[dict]:
     items, url, p = [], first_url, dict(params)
     while url and len(items) < max_records:
-        data = get(url, params=p)
+        data = get(url, params=p, retries=6)
         items.extend(data.get(key, []))
         nxt = data.get("page_meta", {}).get("next")
         url, p = (BASE + nxt, None) if nxt else (None, None)
@@ -38,10 +38,25 @@ def fetch_activities(target_id: str, max_records: int = 3000) -> pd.DataFrame:
     """Nishonga qarshi o'lchangan faolliklar (pChEMBL = -log10(IC50/Ki/EC50, M))."""
     items = _paginate(
         f"{API}/activity.json",
-        {"target_chembl_id": target_id, "pchembl_value__isnull": "false",
-         "standard_relation": "=", "limit": 1000},
+        {"target_chembl_id": target_id, "pchembl_value__isnull": "false", "limit": 1000},
         "activities", max_records,
     )
+    cols = ["molecule_chembl_id", "smiles", "pchembl"]
+    df = pd.DataFrame([{
+        "molecule_chembl_id": a.get("molecule_chembl_id"),
+        "smiles": a.get("canonical_smiles"),
+        "pchembl": a.get("pchembl_value"),
+        "relation": a.get("standard_relation"),
+    } for a in items])
+    if df.empty:
+        return pd.DataFrame(columns=cols)
+    # Faqat aniq o'lchovlar ("=") — "> 10000" kabi taxminiy qiymatlarni tashlaymiz
+    df = df[df["relation"].isna() | (df["relation"] == "=")]
+    df["pchembl"] = pd.to_numeric(df["pchembl"], errors="coerce")
+    df = df.dropna(subset=["smiles", "pchembl"])
+    # Bir molekula uchun bir nechta o'lchov bo'lsa — mediana
+    return df.groupby(["molecule_chembl_id", "smiles"], as_index=False)["pchembl"].median()
+
     df = pd.DataFrame([{
         "molecule_chembl_id": a.get("molecule_chembl_id"),
         "smiles": a.get("canonical_smiles"),
@@ -60,7 +75,9 @@ def fetch_approved_drugs(max_records: int = 5000) -> pd.DataFrame:
     """Tasdiqlangan (max_phase=4) kichik molekulali dorilar."""
     items = _paginate(
         f"{API}/molecule.json",
-        {"max_phase": 4, "molecule_type": "Small molecule", "limit": 1000},
+        {"max_phase": 4, "molecule_type": "Small molecule", "limit": 200,
+         # Faqat kerakli maydonlar — javob ~10 barobar yengil, server yiqilmaydi
+         "only": "molecule_chembl_id,pref_name,molecule_structures,first_approval"},
         "molecules", max_records,
     )
     rows = []
