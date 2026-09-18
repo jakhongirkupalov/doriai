@@ -8,8 +8,8 @@ data/raw/*
 data/cache/*
 data/processed/*
 !data/**/.gitkeep
-models/admet/*.joblib
 .DS_Store
 .vscode/*
 !.vscode/settings.json
 *.egg-info/
+!data/processed/approved_drugs.csv
