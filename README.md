@@ -1,38 +1,75 @@
-# 🧬 DoriAI — AI yordamida dori kashfiyotini tezlashtirish
+# 🧬 DoriAI — dori nomzodlarini laboratoriyadan oldin saralash
 
-> Umummilly AI Xakaton, Xorazm bosqichi · **Tibbiyot treki** 
+> Umummilly AI Xakaton, Xorazm bosqichi · **Tibbiyot treki**
 
-Yangi dori yaratish **10–15 yil** va milliardlab dollar talab qiladi; nomzodlarning katta qismi
-samarasizlik yoki toksiklik tufayli klinik bosqichda to'xtaydi. DoriAI shu voronkaning
-**eng qimmat xatolarini erta bosqichda** aniqlaydi va 5 ta bosqichni bitta platformada birlashtiradi.
+Yangi dori yaratish **10–15 yil** va milliardlab dollar talab qiladi. Klinik nomzodlarning taxminan 90 foizi
+sinovlarda to'xtaydi — ko'pincha samarasizlik yoki toksiklik tufayli, ya'ni oldinroq aniqlanishi mumkin
+bo'lgan sabablar bilan.
 
-| Modul | Nima qiladi | Texnologiya |
-|---|---|---|
-| 🔬 Molekula tahlili | Lipinski/Veber, QED, SA score, PAINS/Brenk, ADMET profil, izohlanuvchi **DoriAI Score** | RDKit + Random Forest |
-| 🧪 Virtual skrining | Minglab birikmani saralab, reyting va filtrlar | ECFP4 fingerprint + ML |
-| 💊 Drug repurposing | Nishonga (ChEMBL) model o'qitib, tasdiqlangan dorilarni qayta qo'llash gipotezalari | QSAR + Tanimoto |
-| 📋 Klinik reja | ClinicalTrials.gov benchmark, tanlama hajmi, protokol sinopsisi | API v2 + LLM |
-| 📚 Ilmiy tahlil | PubMed trendlari, TF-IDF atamalar, manbali AI xulosa | E-utilities + LLM |
+**DoriAI** — tadqiqotchi molekulani sintez qilishdan oldin uning dori bo'lishga yaroqliligini baholaydigan
+va mavjud dorilardan yangi qo'llanish nomzodlarini topadigan veb-ilova.
 
-## Tez start
+## Modullar
+
+| Modul | Nima qiladi |
+| --- | --- |
+| 🔬 **Molekula tahlili** | Bitta molekulaning to'liq profili: fizik-kimyoviy xossalar, Lipinski/Veber, QED, sintez qiyinligi, PAINS/Brenk ogohlantirishlari, 15 ta ADMET bashorati va izohlanuvchi **DoriAI Score** (0–100) |
+| 🧪 **Virtual skrining** | Molekulalar ro'yxatini (CSV) baholab reyting tuzadi, toksik va "yolg'on-musbat" nomzodlarni ajratadi |
+| 💊 **Drug repurposing** | Tanlangan oqsil-nishon uchun ChEMBL o'lchovlarida real vaqtda model o'qitadi va **3311 ta tasdiqlangan dori** orasidan nomzodlarni topadi |
+
+Keyingi bosqich (kod tayyor, `app/kelajak/`): klinik tadqiqotni rejalashtirish (ClinicalTrials.gov) va
+ilmiy adabiyot tahlili (PubMed).
+
+## AI qismi: o'zimiz o'qitgan modellar
+
+Tayyor AI xizmatlariga so'rov yuborilmaydi. Barcha bashorat qiluvchi modellar ochiq ilmiy ma'lumotlarda
+**o'zimiz tomonimizdan o'qitilgan** (Random Forest, scikit-learn).
+
+| Model | Ma'lumot | Natija |
+| --- | --- | --- |
+| EGFR faolligi (repurposing namunasi) | ChEMBL, 1985 molekula | R² = 0.72, RMSE = 0.68 (5-fold CV) |
+| Suvda eruvchanlik | ESOL, 1128 molekula | R² = 0.78 |
+| Klinik toksiklik xavfi | ClinTox, 1480 molekula | ROC-AUC = 0.70 |
+| Toksiklik mexanizmlari (12 ta) | Tox21, ~7800 molekula | `models/admet/metrics.json` |
+
+ADMET modellari **scaffold split** bilan baholangan: test to'plamiga faqat o'qitishda uchramagan kimyoviy
+skeletlar tushadi. Bu natijalarni real laboratoriya sharoitiga yaqinlashtiradi.
+
+## Ishga tushirish
 
 ```bash
-git clone <repo> && cd doriai
-python -m venv .venv && source .venv/bin/activate     # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-pip install -e .
-
-python scripts/download_datasets.py        # ochiq datasetlar (~10 MB)
-python scripts/train_admet.py --tasks solubility bbbp clintox   # tezkor variant
-python scripts/fetch_approved_drugs.py     # ixtiyoriy: ChEMBL kutubxonasi
-cp .env.example .env                       # ixtiyoriy: LLM kaliti
+git clone https://github.com/jakhongirkupalov/doriai.git
+cd doriai
+python -m venv .venv
+source .venv/Scripts/activate        # Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt      # paketning o'zi ham o'rnatiladi
 
 streamlit run app/Home.py
 ```
 
+O'qitilgan modellar va dorilar kutubxonasi repozitoriyada mavjud, qayta o'qitish shart emas.
+Modellarni noldan qayta yaratish uchun:
+
+```bash
+python scripts/download_datasets.py
+python scripts/train_admet.py
+python scripts/fetch_approved_drugs.py
+```
+
+## Texnologiyalar
+
+Python · RDKit · scikit-learn · pandas · Streamlit · Plotly · ChEMBL API
+
 ## Ma'lumot manbalari
-ChEMBL (CC BY-SA 3.0) · MoleculeNet / DeepChem (MIT) · ClinicalTrials.gov API v2 · PubMed E-utilities · RDKit (BSD).
+
+ChEMBL (EMBL-EBI, CC BY-SA 3.0) · MoleculeNet: ESOL, BBBP, ClinTox, Tox21 (NIH/EPA/FDA) · RDKit (BSD)
+
+## Cheklovlar
+
+- Modellar molekulaning 2D tuzilishiga asoslanadi; 3D docking hisobga olinmaydi.
+- DoriAI Score umumiy maqsadli dorilar uchun sozlangan; onkologik dorilar sitotoksikligi tufayli past baholanishi mumkin.
+- Bashoratlar laboratoriya tajribasini almashtirmaydi — ular qaysi birikmani birinchi navbatda tekshirishni tanlashga yordam beradi.
 
 ## Mas'uliyat cheklovi
-DoriAI — **tadqiqot uchun qarorni qo'llab-quvvatlovchi vosita**. Bashoratlar laboratoriya
-tajribalari va klinik tekshiruvni almashtirmaydi va tibbiy tavsiya hisoblanmaydi.
+
+DoriAI — tadqiqot uchun qarorni qo'llab-quvvatlovchi vosita. Tibbiy tavsiya hisoblanmaydi.
