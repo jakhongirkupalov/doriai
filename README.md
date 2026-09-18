@@ -1,4 +1,4 @@
-# 🧬 DoriAI — dori nomzodlarini laboratoriyadan oldin saralash
+# 🧬 DoriAI — kimyoviy birikmalarni laboratoriyadan oldin baholash
 
 > Umummilly AI Xakaton, Xorazm bosqichi · **Tibbiyot treki**
 
