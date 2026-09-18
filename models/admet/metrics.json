@@ -1,0 +1,123 @@
+{
+  "solubility": {
+    "rmse": 0.8693531370307948,
+    "mae": 0.6570846147098353,
+    "r2": 0.8597923977723595,
+    "n_total": 1128,
+    "n_train": 902,
+    "n_test": 226,
+    "split": "scaffold"
+  },
+  "bbbp": {
+    "accuracy": 0.8504901960784313,
+    "roc_auc": 0.7914214691558442,
+    "n_total": 2039,
+    "n_train": 1631,
+    "n_test": 408,
+    "split": "scaffold"
+  },
+  "clintox": {
+    "accuracy": 0.972972972972973,
+    "roc_auc": 0.664279513888889,
+    "n_total": 1480,
+    "n_train": 1184,
+    "n_test": 296,
+    "split": "scaffold"
+  },
+  "tox21_nr_ar": {
+    "accuracy": 0.9834710743801653,
+    "roc_auc": 0.48425828664799253,
+    "n_total": 7258,
+    "n_train": 5806,
+    "n_test": 1452,
+    "split": "scaffold"
+  },
+  "tox21_nr_ar_lbd": {
+    "accuracy": 0.9851851851851852,
+    "roc_auc": 0.6413533834586467,
+    "n_total": 6751,
+    "n_train": 5401,
+    "n_test": 1350,
+    "split": "scaffold"
+  },
+  "tox21_nr_ahr": {
+    "accuracy": 0.8662079510703364,
+    "roc_auc": 0.7909378164653279,
+    "n_total": 6542,
+    "n_train": 5234,
+    "n_test": 1308,
+    "split": "scaffold"
+  },
+  "tox21_nr_aromatase": {
+    "accuracy": 0.9724849527085124,
+    "roc_auc": 0.8134084204880665,
+    "n_total": 5815,
+    "n_train": 4652,
+    "n_test": 1163,
+    "split": "scaffold"
+  },
+  "tox21_nr_er": {
+    "accuracy": 0.8876313662085691,
+    "roc_auc": 0.6386446886446886,
+    "n_total": 6186,
+    "n_train": 4949,
+    "n_test": 1237,
+    "split": "scaffold"
+  },
+  "tox21_nr_er_lbd": {
+    "accuracy": 0.9553956834532374,
+    "roc_auc": 0.7543880086983534,
+    "n_total": 6948,
+    "n_train": 5558,
+    "n_test": 1390,
+    "split": "scaffold"
+  },
+  "tox21_nr_ppar_gamma": {
+    "accuracy": 0.9829325058184639,
+    "roc_auc": 0.8332989903152689,
+    "n_total": 6443,
+    "n_train": 5154,
+    "n_test": 1289,
+    "split": "scaffold"
+  },
+  "tox21_sr_are": {
+    "accuracy": 0.8163090128755365,
+    "roc_auc": 0.7646913372895906,
+    "n_total": 5825,
+    "n_train": 4660,
+    "n_test": 1165,
+    "split": "scaffold"
+  },
+  "tox21_sr_atad5": {
+    "accuracy": 0.9745222929936306,
+    "roc_auc": 0.7151617848785604,
+    "n_total": 7065,
+    "n_train": 5652,
+    "n_test": 1413,
+    "split": "scaffold"
+  },
+  "tox21_sr_hse": {
+    "accuracy": 0.9504643962848297,
+    "roc_auc": 0.7960097471824551,
+    "n_total": 6460,
+    "n_train": 5168,
+    "n_test": 1292,
+    "split": "scaffold"
+  },
+  "tox21_sr_mmp": {
+    "accuracy": 0.8708010335917312,
+    "roc_auc": 0.8756139688022885,
+    "n_total": 5804,
+    "n_train": 4643,
+    "n_test": 1161,
+    "split": "scaffold"
+  },
+  "tox21_sr_p53": {
+    "accuracy": 0.9578713968957872,
+    "roc_auc": 0.7854746371987751,
+    "n_total": 6767,
+    "n_train": 5414,
+    "n_test": 1353,
+    "split": "scaffold"
+  }
+}

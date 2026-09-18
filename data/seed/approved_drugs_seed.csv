@@ -1,0 +1,20 @@
+name,smiles,indication
+Aspirin,CC(=O)Oc1ccccc1C(=O)O,"Og'riq, isitma; keyinchalik — tromboz profilaktikasi (qayta qo'llash namunasi)"
+Paracetamol,CC(=O)Nc1ccc(O)cc1,"Og'riq qoldiruvchi, isitma tushiruvchi"
+Ibuprofen,CC(C)Cc1ccc(cc1)C(C)C(=O)O,Yallig'lanishga qarshi (NSAID)
+Naproxen,COc1ccc2cc(ccc2c1)C(C)C(=O)O,Yallig'lanishga qarshi (NSAID)
+Diclofenac,OC(=O)Cc1ccccc1Nc1c(Cl)cccc1Cl,Yallig'lanishga qarshi (NSAID)
+Caffeine,Cn1cnc2c1c(=O)n(C)c(=O)n2C,"MNS stimulyatori, chaqaloqlar apnoesi"
+Metformin,CN(C)C(=N)NC(=N)N,2-tur qandli diabet; saraton va qarishga qarshi tadqiqotlar
+Lidocaine,CCN(CC)CC(=O)Nc1c(C)cccc1C,"Mahalliy anestetik, aritmiya"
+Propranolol,CC(C)NCC(O)COc1cccc2ccccc12,"Gipertoniya; keyinchalik — gemangioma, migren"
+Fluoxetine,CNCCC(Oc1ccc(cc1)C(F)(F)F)c1ccccc1,Depressiya (SSRI)
+Atenolol,CC(C)NCC(O)COc1ccc(CC(N)=O)cc1,"Gipertoniya, stenokardiya"
+Salbutamol,CC(C)(C)NCC(O)c1ccc(O)c(CO)c1,Bronxial astma
+Captopril,CC(CS)C(=O)N1CCCC1C(=O)O,Gipertoniya (ACE ingibitori)
+Omeprazole,COc1ccc2[nH]c(nc2c1)S(=O)Cc1ncc(C)c(OC)c1C,"Oshqozon yarasi, reflyuks"
+Sildenafil,CCCc1nn(C)c2c1nc([nH]c2=O)-c1cc(ccc1OCC)S(=O)(=O)N1CCN(C)CC1,"Stenokardiya uchun ishlab chiqilgan -> erektil disfunksiya, o'pka gipertenziyasi"
+Thalidomide,O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1,"Qayta qo'llash: moxov asoratlari, ko'p mielomali"
+Chloroquine,CCN(CC)CCCC(C)Nc1ccnc2cc(Cl)ccc12,Bezgak; autoimmun kasalliklar
+Amantadine,NC12CC3CC(CC(C3)C1)C2,Gripp -> Parkinson kasalligi (qayta qo'llash)
+Minoxidil,Nc1cc(N2CCCCC2)nc(N)[n+]1[O-],Gipertoniya -> soch to'kilishi (qayta qo'llash)

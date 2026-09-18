@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.pytest_cache/
+.streamlit/secrets.toml
+data/raw/*
+data/cache/*
+data/processed/*
+!data/**/.gitkeep
+models/admet/*.joblib
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+*.egg-info/
