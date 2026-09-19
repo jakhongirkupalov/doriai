@@ -15,7 +15,7 @@ va mavjud dorilardan yangi qo'llanish nomzodlarini topadigan veb-ilova.
 | --- | --- |
 | 🔬 **Molekula tahlili** | Bitta molekulaning to'liq profili: fizik-kimyoviy xossalar, Lipinski/Veber, QED, sintez qiyinligi, PAINS/Brenk ogohlantirishlari, 15 ta ADMET bashorati va izohlanuvchi **DoriAI Score** (0–100) |
 | 🧪 **Virtual skrining** | Molekulalar ro'yxatini (CSV) baholab reyting tuzadi, toksik va "yolg'on-musbat" nomzodlarni ajratadi |
-| 💊 **Drug repurposing** | Tanlangan oqsil-nishon uchun ChEMBL o'lchovlarida real vaqtda model o'qitadi va **3311 ta tasdiqlangan dori** orasidan nomzodlarni topadi |
+| 💊 **Drug repurposing** | Kasallik nishonini tanlab (tayyor ro'yxat yoki ChEMBL qidiruvi), **3311 ta tasdiqlangan dori** orasidan nomzod topadi. Har bir nomzod nishonga ta'sir kuchi va xavfsizlik (DoriAI Score) bo'yicha baholanadi |
 
 Keyingi bosqich (kod tayyor, `app/kelajak/`): klinik tadqiqotni rejalashtirish (ClinicalTrials.gov) va
 ilmiy adabiyot tahlili (PubMed).
