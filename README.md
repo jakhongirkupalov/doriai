@@ -1,5 +1,7 @@
 # 🧬 DoriAI — kimyoviy birikmalarni laboratoriyadan oldin baholash
 
+📊 [Taqdimot (PDF)](docs/DoriAI.loyihasi.pdf) · 🌐 [Veb-sayt](https://doriai-web-production.up.railway.app/)
+
 > Umummilly AI Xakaton, Xorazm bosqichi · **Tibbiyot treki**
 
 Yangi dori yaratish **10–15 yil** va milliardlab dollar talab qiladi. Klinik nomzodlarning taxminan 90 foizi
