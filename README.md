@@ -1,6 +1,6 @@
 # 🧬 DoriAI — kimyoviy birikmalarni laboratoriyadan oldin baholash
 
-📊 [Taqdimot (PDF)](docs/DoriAI.loyihasi.pdf) · 🌐 [Veb-sayt](Doriai.wwwv.uz)
+📊 [Taqdimot (PDF)](docs/DoriAI.loyihasi.pdf) · 🌐 [Veb-sayt](https://doriai.wwwv.uz/)
 
 > Umummilly AI Xakaton, Xorazm bosqichi · **Tibbiyot treki**
 
