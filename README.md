@@ -22,6 +22,10 @@ ilmiy adabiyot tahlili (PubMed).
 
 ## AI qismi: o'zimiz o'qitgan modellar
 
+**Validatsiya:** model o'qitish ma'lumotlarida bo'lmagan haqiqiy dorilarni topdi —
+EGFR nishonida **afatinib** va **dacomitinib**, COX-2 nishonida **mefenam kislota**.
+Ikki mustaqil kasallik nishonida bir xil natija.
+
 Tayyor AI xizmatlariga so'rov yuborilmaydi. Barcha bashorat qiluvchi modellar ochiq ilmiy ma'lumotlarda
 **o'zimiz tomonimizdan o'qitilgan** (Random Forest, scikit-learn).
 
@@ -31,6 +35,7 @@ Tayyor AI xizmatlariga so'rov yuborilmaydi. Barcha bashorat qiluvchi modellar oc
 | Suvda eruvchanlik | ESOL, 1128 molekula | R² = 0.78 |
 | Klinik toksiklik xavfi | ClinTox, 1480 molekula | ROC-AUC = 0.70 |
 | Toksiklik mexanizmlari (12 ta) | Tox21, ~7800 molekula | `models/admet/metrics.json` |
+| COX-2 faolligi | ChEMBL, 1991 molekula | R² = 0.57 (5-fold CV) |
 
 ADMET modellari **scaffold split** bilan baholangan: test to'plamiga faqat o'qitishda uchramagan kimyoviy
 skeletlar tushadi. Bu natijalarni real laboratoriya sharoitiga yaqinlashtiradi.
