@@ -28,7 +28,7 @@ API javobi `data/cache/` ga yoziladi — demo internetsiz ham ishlaydi.
    qayta topsa, bu uning ishlayotganining dalili (`known_active` ustuni).
 4. **Izohlanuvchanlik** — DoriAI Score komponentlari va og'irliklari ochiq ko'rsatiladi.
 
-## Cheklovlar (halol ro'yxat — hakamlar buni qadrlaydi)
+## Cheklovlar 
 - 2D fingerprint asosidagi modellar; 3D dokking va oqsil strukturasi hisobga olinmaydi.
 - ADMET modellari bashorat, o'lchov emas: ROC-AUC ~0,7–0,85 oralig'ida.
 - Generativ molekula dizayni MVP'ga kirmagan — keyingi bosqich rejasi.
